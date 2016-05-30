@@ -20,6 +20,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':Saibase')
+    compile project(':SaiBase')
     compile project(':libraryconfig')
 }

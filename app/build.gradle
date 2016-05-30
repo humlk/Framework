@@ -23,7 +23,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile project(':libraryconfig')
-    compile project(':Saibase')
+    compile project(':SaiBase')
     compile project(':SaiNet')
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'
