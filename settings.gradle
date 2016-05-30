@@ -1,0 +1,5 @@
+include ':app'
+include ':Saibase'
+include ':SaiNet'
+include ':libraryconfig'
+include ':platform'
