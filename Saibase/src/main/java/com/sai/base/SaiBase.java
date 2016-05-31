@@ -1,11 +1,12 @@
 package com.sai.base;
 
 
+import android.app.Application;
 import android.content.Context;
 
 public class SaiBase {
 
-    private Context mContext;
+    private Application mContext;
 
     private SaiBase() {
     }
@@ -18,7 +19,7 @@ public class SaiBase {
         return JudgeBaseInstance.instance;
     }
 
-    public void init(Context context){
+    public void init(Application context){
         mContext = context;
 
     }
