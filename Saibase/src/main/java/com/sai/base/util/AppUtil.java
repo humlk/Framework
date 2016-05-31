@@ -3,6 +3,7 @@ package com.sai.base.util;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -66,6 +67,14 @@ public class AppUtil {
             return Environment.getExternalStorageDirectory().getPath();
         }
         return null;
+    }
+
+    public static String getStorePath(Application context){
+        String path = getSDStore();
+        if(StringUtil.isEmpty(path)){
+            path = context.getFilesDir().getPath();
+        }
+        return path;
     }
 
     public static boolean isAppOnForeground(Context context) {

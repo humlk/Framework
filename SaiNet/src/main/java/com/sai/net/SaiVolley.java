@@ -30,7 +30,7 @@ class SaiVolley {
 
     private OkHttpClient mHttpClient;
 
-    private Object mFileSynObject = new Object();
+    private final Object mFileSynObject = new Object();
 
     public static SaiVolley get() {
         if(Instance == null){
