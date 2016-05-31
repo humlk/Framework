@@ -9,7 +9,7 @@ public class BigDecimalBuilder {
     private BigDecimal mBigDecimal;
 
     public BigDecimalBuilder(String value) {
-        mBigDecimal = new BigDecimal(value);
+        mBigDecimal = getBigDecimal(value);
     }
 
     /**
@@ -57,7 +57,7 @@ public class BigDecimalBuilder {
     /**
      * 除法
      *
-     * @param value
+     * @param value 如果为0则自动转为1
      * @return
      */
     public BigDecimalBuilder divide(String value) {
@@ -67,7 +67,7 @@ public class BigDecimalBuilder {
     /**
      * 除法
      *
-     * @param value
+     * @param value 如果为0则自动转为1
      * @param scale        保留小数点位数
      * @param roundingMode 保留规则
      * @return
@@ -80,14 +80,19 @@ public class BigDecimalBuilder {
     /**
      * 求余
      *
-     * @param value
+     * @param value 如果为0则自动转为1
      * @return
      */
     public BigDecimalBuilder remainder(String value) {
-        mBigDecimal = mBigDecimal.remainder(getBigDecimal(value));
+        mBigDecimal = mBigDecimal.remainder(getBigDecimal(value, BigDecimal.ONE));
         return this;
     }
 
+    /**
+     *
+     * @param num
+     * @return
+     */
     public int compare(String num) {
         BigDecimal b = getBigDecimal(num);
         return mBigDecimal.compareTo(b);
@@ -106,5 +111,9 @@ public class BigDecimalBuilder {
 
     public BigDecimal build() {
         return mBigDecimal;
+    }
+
+    public static void main(String[] args){
+        System.out.print(2%1);
     }
 }

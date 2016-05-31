@@ -15,65 +15,7 @@ import java.math.BigDecimal;
 public class BigDecimalUtil {
 
     private BigDecimalUtil(){};
-    /**
-     * 计算两个数值的和
-     * @param num1
-     * @param num2
-     * @return
-     */
-    public static String stringAdd(String num1, String num2){
-        BigDecimal b1 = getBigDecimal(num1);
-        BigDecimal b2 = getBigDecimal(num2);
-        BigDecimal result = b1.add(b2);
-        return result.toString();
-    }
-    
-    public static String stringAdd(String ...num){
-        BigDecimal result = BigDecimal.ZERO;
-        for(String str:num){
-            result = result.add(getBigDecimal(str));
-        }
-        return result.toString();
-    }
-    
-    /**
-     * 计算两个数值差值
-     * @param num1
-     * @param num2
-     * @return
-     */
-    public static String stringSub(String num1, String num2){
-        BigDecimal b1 = getBigDecimal(num1);
-        BigDecimal b2 = getBigDecimal(num2);
-        BigDecimal result = b1.subtract(b2);
-        return result.toString();
-    }
-    
-    /**
-     * 乘法
-     * @param num1
-     * @param num2
-     * @return
-     */
-    public static String stringMultiply(String num1, String num2){
-        BigDecimal b1 = getBigDecimal(num1);
-        BigDecimal b2 = getBigDecimal(num2);
-        BigDecimal result = b1.multiply(b2);
-        return result.toString();
-    }
 
-    /**
-     * 除法
-     * @param num1
-     * @param num2
-     * @return
-     */
-    public static String stringDivide(String num1, String num2){
-        BigDecimal b1 = getBigDecimal(num1);
-        BigDecimal b2 = getBigDecimal(num2);
-        BigDecimal result = b1.divide(b2,2);
-        return result.toString();
-    }
 
     /**
      * 获取BigDecimal
@@ -86,7 +28,7 @@ public class BigDecimalUtil {
         }
         return new BigDecimal(num);
     }
-    
+
     /**
      * 大于1,相等0,小于-1
      * @param num1
