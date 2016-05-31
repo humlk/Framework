@@ -1,4 +1,4 @@
-include ':app', ':permission', ':security'
+include ':app', ':permission', ':security', ':ui'
 include ':SaiBase'
 include ':SaiNet'
 include ':libraryconfig'

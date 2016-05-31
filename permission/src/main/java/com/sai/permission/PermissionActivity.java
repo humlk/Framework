@@ -7,14 +7,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-
+/**
+ * android 6.0 权限管理
+ * 参照 https://developer.android.com/training/permissions/requesting.html#perm-request
+ */
 public class PermissionActivity extends AppCompatActivity{
 
     private final String TAG = "PermissionActivity";
 
     private static final String Key_Permissions = "permissions";
 
-    private int requesCode = 001;
+    private int requestCode = 001;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +38,7 @@ public class PermissionActivity extends AppCompatActivity{
             Log.d(TAG,"has permissions");
         }else{
             Log.d(TAG,"do not has permissions");
-            PermissionManager.request(this,requesCode,getPermissions());
+            PermissionManager.request(this,requestCode,getPermissions());
         }
     }
 
@@ -44,7 +48,8 @@ public class PermissionActivity extends AppCompatActivity{
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if(requesCode != requesCode){
+        if(requestCode != requestCode){
+            finish();
             return;
         }
 
