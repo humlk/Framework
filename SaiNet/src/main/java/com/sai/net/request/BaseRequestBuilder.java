@@ -3,6 +3,7 @@ package com.sai.net.request;
 import com.sai.base.util.StringUtil;
 import com.sai.net.http.Request;
 import com.sai.net.request.http.HttpRequest;
+import com.sai.net.util.LogUtil;
 
 import java.util.Map;
 
@@ -53,6 +54,7 @@ public abstract class BaseRequestBuilder<T> {
             url = StringUtil.toString(url, "?", mRequestParams.getUrlParams());
         }
 
+        LogUtil.d("reuqest url= "+url);
         HttpRequest mRequest = createRequest(url);
 
         if (mReqTag == null) {

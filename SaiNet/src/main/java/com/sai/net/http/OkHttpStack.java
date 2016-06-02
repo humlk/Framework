@@ -65,16 +65,12 @@ public class OkHttpStack implements HttpStack{
         //body
         setConnectionParametersForRequest(builder, request);
 
-
-        //处理各种请求方式: 缓存，网络
-
-
-
         //网络请求
         OkHttpClient client = httpClientBuild.build();
-        Response response = client.newCall(builder.build()).execute();
+        Response response = null;
+        response = client.newCall(builder.build()).execute();
         if(response == null){
-            return null;
+            throw new IOException("response is null");
         }
         return parseOkResponse(response);
     }
@@ -109,7 +105,7 @@ public class OkHttpStack implements HttpStack{
     }
 
     static void setConnectionParametersForRequest(okhttp3.Request.Builder builder,
-                                                  Request<?> request) throws IOException {
+                                                  Request<?> request)  {
         switch (request.getMethod()) {
             case Request.Method.GET:
                 builder.get();
@@ -136,7 +132,7 @@ public class OkHttpStack implements HttpStack{
                 builder.patch(getBody(request));
                 break;
             default:
-                throw new IllegalStateException("Unknown method type.");
+                throw new IllegalStateException("Unknown method type");
         }
     }
 

@@ -3,8 +3,8 @@ package com.sai.net.http;
 import android.os.Process;
 import android.os.SystemClock;
 
-import com.sai.net.cache.Cache;
-import com.sai.net.exception.BaseException;
+import com.sai.net.SaiRepository;
+import com.sai.net.exception.SaiException;
 import com.sai.net.util.LogUtil;
 
 import java.util.concurrent.BlockingQueue;
@@ -13,20 +13,35 @@ import java.util.concurrent.BlockingQueue;
  * 进行网络调度
  */
 public class NetworkDispatcher extends Thread {
-    /** 使用阻塞队列，当队列为空的情况下，消费线程就会阻塞；满时，生产线程阻塞 */
+    /**
+     * 使用阻塞队列，当队列为空的情况下，消费线程就会阻塞；满时，生产线程阻塞
+     */
     private final BlockingQueue<Request<?>> mQueue;
-    private final Network mNetwork;
-    private final Cache mCache;
+//    private final Network mNetwork;
+//    private final Cache mCache;
     private final ResponseDelivery mDelivery;
-    /** 是否正在运行 */
+
+    private SaiRepository mRepository;
+    /**
+     * 是否正在运行
+     */
     private volatile boolean mRunning = true;
 
+
+//    public NetworkDispatcher(BlockingQueue<Request<?>> queue,
+//                             Network network, Cache cache,
+//                             ResponseDelivery delivery) {
+//        mQueue = queue;
+//        mNetwork = network;
+//        mCache = cache;
+//        mDelivery = delivery;
+//    }
+
     public NetworkDispatcher(BlockingQueue<Request<?>> queue,
-            Network network, Cache cache,
-            ResponseDelivery delivery) {
+                             SaiRepository repository,
+                             ResponseDelivery delivery){
         mQueue = queue;
-        mNetwork = network;
-        mCache = cache;
+        mRepository = repository;
         mDelivery = delivery;
     }
 
@@ -76,48 +91,27 @@ public class NetworkDispatcher extends Thread {
                 }
                 continue;
             }
+            //请求取消了
+            if (request.isCanceled()) {
+                LogUtil.d("请求被取消");
+                mDelivery.postCancel(request);
+                continue;
+            }
 
+            LogUtil.show("请求开始执行");
             try {
-
-               //请求取消了
-                if (request.isCanceled()) {
-                    LogUtil.d("请求被取消");
-                    mDelivery.postCancel(request);
-                    continue;
-                }
-
                 // 执行请求
-                LogUtil.show("请求开始执行");
-                NetworkResponse networkResponse = mNetwork.performRequest(request);
-
-//                if (networkResponse.notModified && request.hasHadResponseDelivered()) {
-//                    LogUtil.d("请求内容没有更新，且已经分发过了");
-//                    request.finish();
-//                    continue;
-//                }
-                LogUtil.show("解析请求返回信息");
-                // 解析响应信息
-                Response<?> response = request.parseNetworkResponse(networkResponse);
-
-                //进行缓存
-                if (request.shouldCache() && response.cacheEntry != null) {
-                    mCache.put(request.getCacheKey(), response.cacheEntry);
-                }
-
+                Response<?> response = mRepository.getResponse(request);
                 //执行交付工作
                 mDelivery.postResponse(request, response);
-            } catch (BaseException exception) {
+            } catch (SaiException exception) {
                 exception.setNetworkTimeMs(SystemClock.elapsedRealtime() - startTimeMs);
                 parseAndDeliverNetworkError(request, exception);
-            } catch (Exception e) {
-                BaseException exception = new BaseException(e);
-                exception.setNetworkTimeMs(SystemClock.elapsedRealtime() - startTimeMs);
-                mDelivery.postError(request, exception);
             }
         }
     }
 
-    private void parseAndDeliverNetworkError(Request<?> request, BaseException error) {
+    private void parseAndDeliverNetworkError(Request<?> request, SaiException error) {
         error = request.parseNetworkError(error);
         mDelivery.postError(request, error);
     }

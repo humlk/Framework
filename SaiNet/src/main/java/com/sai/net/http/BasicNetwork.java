@@ -5,16 +5,14 @@ import android.os.SystemClock;
 import com.sai.base.util.StreamUtil;
 import com.sai.net.cache.Cache;
 import com.sai.net.exception.AuthFailureError;
+import com.sai.net.exception.SaiException;
 import com.sai.net.exception.ClientError;
-import com.sai.net.exception.BaseException;
 import com.sai.net.exception.NetworkError;
 import com.sai.net.exception.NoConnectionError;
 import com.sai.net.exception.ServerError;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -41,17 +39,18 @@ public class BasicNetwork implements Network {
         mPool = pool;
     }
 
+
     /**
      * 网络请求
      *
      * @param request
      * @return
-     * @throws BaseException
+     * @throws SaiException
      */
     @Override
-    public NetworkResponse performRequest(Request<?> request) throws BaseException {
+    public NetworkResponse performRequest(Request<?> request) throws SaiException {
         long requestStart = SystemClock.elapsedRealtime();
-        //依靠Exception退出循环
+        //处理重发机制
         while (true) {
             HttpResponse httpResponse = null;
             byte[] responseContents = null;
@@ -69,16 +68,17 @@ public class BasicNetwork implements Network {
                 responseHeaders = httpResponse.getHeaders();
 
                 /*   ----------------- 检查响应状态码 ------------------ */
-                if (statusCode < 200 || statusCode > 299) {
-                    throw new IOException();
-                }
 
                 // 如果服务端返回304
                 if (statusCode == HttpStatus.SC_NOT_MODIFIED) {
                     //检查本地的缓存
                     return new NetworkResponse(HttpStatus.SC_NOT_MODIFIED, request.getCacheEntry() == null ? null : request.getCacheEntry().data,
-                            responseHeaders, true,
-                            SystemClock.elapsedRealtime() - requestStart);
+                            responseHeaders, true, SystemClock.elapsedRealtime() - requestStart);
+                }
+
+                if (statusCode < 200 || statusCode > 299) {
+                    //转去后面的异常
+                    throw new IOException();
                 }
 
                 //request自己想解析响应数据
@@ -96,13 +96,13 @@ public class BasicNetwork implements Network {
 
                 return new NetworkResponse(statusCode, responseContents, responseHeaders, false,
                         SystemClock.elapsedRealtime() - requestStart);
-            } catch (SocketTimeoutException e) {
-                attemptRetryOnException("socket", request, new BaseException(
-                        new SocketTimeoutException("socket timeout")));
-            } catch (MalformedURLException e) {
-                attemptRetryOnException("connection", request,
-                        new BaseException("Bad URL " + request.getUrl(), e));
-            }catch (IOException e) {
+//            } catch (SocketTimeoutException e) {
+//                attemptRetryOnException("socket", request, new SaiException(
+//                        new SocketTimeoutException("socket timeout")));
+//            } catch (MalformedURLException e) {
+//                attemptRetryOnException("connection", request,
+//                        new SaiException("Bad URL " + request.getUrl(), e));
+            } catch (IOException e) {
                 int statusCode;
                 if (httpResponse != null) {
                     statusCode = httpResponse.getStatusCode();
@@ -138,19 +138,17 @@ public class BasicNetwork implements Network {
         }
     }
 
-
     private static void attemptRetryOnException(String logPrefix, Request<?> request,
-                                                BaseException exception) throws BaseException {
+                                                SaiException exception) throws SaiException {
         RetryPolicy retryPolicy = request.getRetryPolicy();
         try {
             retryPolicy.retry(exception);
-        } catch (BaseException e) {
+        } catch (SaiException e) {
             throw e;
         }
     }
 
     private void addCacheHeaders(Map<String, String> headers, Cache.Entry entry) {
-        // If there's no cache entry, we're done.
         if (entry == null) {
             return;
         }

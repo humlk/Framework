@@ -2,7 +2,7 @@ package com.sai.net.http;
 
 
 import com.sai.net.cache.Cache;
-import com.sai.net.exception.BaseException;
+import com.sai.net.exception.SaiException;
 
 public class Response<T> {
 
@@ -11,7 +11,7 @@ public class Response<T> {
     }
 
 
-    public static <T> Response<T> error(BaseException error) {
+    public static <T> Response<T> error(SaiException error) {
         return new Response<T>(error);
     }
 
@@ -19,7 +19,7 @@ public class Response<T> {
 
     public final Cache.Entry cacheEntry;
 
-    public final BaseException error;
+    public final SaiException error;
 
     public boolean isSuccess() {
         return error == null;
@@ -32,7 +32,7 @@ public class Response<T> {
         this.error = null;
     }
 
-    private Response(BaseException error) {
+    private Response(SaiException error) {
         this.result = null;
         this.cacheEntry = null;
         this.error = error;

@@ -1,6 +1,6 @@
 package com.sai.net.http;
 
-import com.sai.net.exception.BaseException;
+import com.sai.net.exception.SaiException;
 
 /**
  * 重发机制
@@ -12,5 +12,5 @@ public interface RetryPolicy {
 
     public int getCurrentRetryCount();
 
-    public void retry(BaseException error) throws BaseException;
+    public void retry(SaiException error) throws SaiException;
 }

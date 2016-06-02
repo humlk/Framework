@@ -53,7 +53,7 @@ public class SaiNet implements SaiConstant {
         }
     }
 
-    public static SaiHelper getConfig(){
+    public static SaiHelper getHelper(){
         return mConfig;
     }
 

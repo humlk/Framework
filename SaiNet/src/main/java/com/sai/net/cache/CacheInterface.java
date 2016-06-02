@@ -2,7 +2,7 @@ package com.sai.net.cache;
 
 interface CacheInterface {
 
-    public interface CacheModel{
+    public interface Model{
         /** 只请求网络 **/
         final int ONLY_REQUEST = 0;
         /** 只读缓存 **/

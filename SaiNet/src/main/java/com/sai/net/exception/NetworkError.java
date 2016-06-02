@@ -2,7 +2,7 @@ package com.sai.net.exception;
 
 import com.sai.net.http.NetworkResponse;
 
-public class NetworkError extends BaseException {
+public class NetworkError extends SaiException {
     public NetworkError() {
         super();
     }

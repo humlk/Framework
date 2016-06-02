@@ -2,7 +2,7 @@ package com.sai.net.http;
 
 import android.os.Handler;
 
-import com.sai.net.exception.BaseException;
+import com.sai.net.exception.SaiException;
 
 import java.util.concurrent.Executor;
 
@@ -30,7 +30,7 @@ public class ExecutorDelivery implements ResponseDelivery {
 
 
     @Override
-    public void postError(Request<?> request, BaseException error) {
+    public void postError(Request<?> request, SaiException error) {
         Response<?> response = Response.error(error);
         mResponsePoster.execute(new ResponseDeliveryRunnable(request, response));
     }

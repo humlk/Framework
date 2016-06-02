@@ -1,3 +1,3 @@
 package com.sai.net.exception;
 
-public class TimeoutError extends BaseException { }
+public class TimeoutError extends SaiException { }

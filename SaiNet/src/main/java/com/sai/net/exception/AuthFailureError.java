@@ -3,7 +3,7 @@ package com.sai.net.exception;
 
 import com.sai.net.http.NetworkResponse;
 
-public class AuthFailureError extends BaseException {
+public class AuthFailureError extends SaiException {
     public AuthFailureError() {
         super();
     }

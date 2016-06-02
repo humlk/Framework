@@ -3,6 +3,7 @@ package com.sai.net.http;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.sai.net.SaiRepository;
 import com.sai.net.cache.Cache;
 
 import java.util.HashMap;
@@ -18,7 +19,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class RequestQueue {
 
-    /** 线程安全的计数器 **/
+    /**
+     * 线程安全的计数器
+     **/
     private AtomicInteger mSequenceGenerator = new AtomicInteger();
 
     private final Map<String, Queue<Request<?>>> mWaitingRequests =
@@ -30,42 +33,61 @@ public class RequestQueue {
 //    private final PriorityBlockingQueue<Request<?>> mCacheQueue =
 //        new PriorityBlockingQueue<Request<?>>();
 
-    /** 使用优先级阻塞队列，优先级的判断通过构造函数(Request)传入的Compator对象来决定 */
+    /**
+     * 使用优先级阻塞队列，优先级的判断通过构造函数(Request)传入的Compator对象来决定
+     */
     private final PriorityBlockingQueue<Request<?>> mNetworkQueue =
-        new PriorityBlockingQueue<Request<?>>();
+            new PriorityBlockingQueue<Request<?>>();
 
-    /** 线程池大小 */
+    /**
+     * 线程池大小
+     */
     private static final int DEFAULT_NETWORK_THREAD_POOL_SIZE = 4;
 
-    private final Cache mCache;
+//    private final Cache mCache;
+//
+//    private final Network mNetwork;
 
-    private final Network mNetwork;
-
-    /** 对请求响应进行分发 */
+    /**
+     * 对请求响应进行分发
+     */
     private final ResponseDelivery mDelivery;
 
-    /** 网络调度 */
+    /**
+     * 网络调度
+     */
     private NetworkDispatcher[] mDispatchers;
+
+    private SaiRepository mRepository;
 
 //    /** 缓存调度 */
 //    private CacheDispatcher mCacheDispatcher;
 
 
     public RequestQueue(Cache cache, Network network, int threadPoolSize,
-            ResponseDelivery delivery) {
-        mCache = cache;
-        mNetwork = network;
+                        ResponseDelivery delivery) {
+//        mCache = cache;
+//        mNetwork = network;
         mDispatchers = new NetworkDispatcher[threadPoolSize];
         mDelivery = delivery;
     }
 
-    public RequestQueue(Cache cache, Network network, int threadPoolSize) {
-        this(cache, network, threadPoolSize,
-                new ExecutorDelivery(new Handler(Looper.getMainLooper())));
+    //    public RequestQueue(Cache cache, Network network, int threadPoolSize) {
+//        this(cache, network, threadPoolSize,
+//                new ExecutorDelivery(new Handler(Looper.getMainLooper())));
+//    }
+//
+//    public RequestQueue(Cache cache, Network network) {
+//        this(cache, network, DEFAULT_NETWORK_THREAD_POOL_SIZE);
+//    }
+    public RequestQueue(SaiRepository repository, int threadPoolSize, ResponseDelivery delivery) {
+        mRepository = repository;
+        mDispatchers = new NetworkDispatcher[threadPoolSize];
+        mDelivery = delivery;
     }
 
-    public RequestQueue(Cache cache, Network network) {
-        this(cache, network, DEFAULT_NETWORK_THREAD_POOL_SIZE);
+    public RequestQueue(SaiRepository repository) {
+        this(repository, DEFAULT_NETWORK_THREAD_POOL_SIZE, new ExecutorDelivery(new Handler(Looper.getMainLooper())));
     }
 
     public void start() {
@@ -74,8 +96,7 @@ public class RequestQueue {
 
         // 创建并启动线程池中的线程
         for (int i = 0; i < mDispatchers.length; i++) {
-            NetworkDispatcher networkDispatcher = new NetworkDispatcher(mNetworkQueue, mNetwork,
-                    mCache, mDelivery);
+            NetworkDispatcher networkDispatcher = new NetworkDispatcher(mNetworkQueue, mRepository, mDelivery);
             mDispatchers[i] = networkDispatcher;
             networkDispatcher.start();
         }
@@ -94,9 +115,9 @@ public class RequestQueue {
         return mSequenceGenerator.incrementAndGet();
     }
 
-    public Cache getCache() {
-        return mCache;
-    }
+//    public Cache getCache() {
+//        return mCache;
+//    }
 
     public interface RequestFilter {
         public boolean apply(Request<?> request);
@@ -187,7 +208,7 @@ public class RequestQueue {
 //        }
     }
 
-    public ResponseDelivery getDelivery(){
+    public ResponseDelivery getDelivery() {
         return mDelivery;
     }
 }

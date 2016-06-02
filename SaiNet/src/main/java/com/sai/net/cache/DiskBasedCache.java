@@ -24,7 +24,6 @@ import java.util.Map;
 
 public class DiskBasedCache implements Cache {
 
-
     private final Map<String, CacheHeader> mEntries =
             new LinkedHashMap<String, CacheHeader>(16, .75f, true);
 
@@ -66,6 +65,9 @@ public class DiskBasedCache implements Cache {
 
     @Override
     public synchronized Entry get(String key) {
+        if(key == null){
+            return null;
+        }
         CacheHeader entry = mEntries.get(key);
         if (entry == null) {
             return null;

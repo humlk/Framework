@@ -23,6 +23,6 @@ public class RequestOptions {
 
     /** 是否缓存 默认不缓存**/
     public boolean shouldCache = false;
-    /** 缓存模式 **/
-    public int cacheModel = Cache.CacheModel.ONLY_REQUEST;
+    /** 数据模型 **/
+    public int cacheModel = Cache.Model.ONLY_REQUEST;
 }

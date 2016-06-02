@@ -1,6 +1,6 @@
 package com.sai.net.http;
 
-import com.sai.net.exception.BaseException;
+import com.sai.net.exception.SaiException;
 
 /**
  * 默认重发机制
@@ -74,7 +74,7 @@ public class DefaultRetryPolicy implements RetryPolicy {
      * @param error The error code of the last attempt.
      */
     @Override
-    public void retry(BaseException error) throws BaseException {
+    public void retry(SaiException error) throws SaiException {
         mCurrentRetryCount++;
         mCurrentTimeoutMs += (mCurrentTimeoutMs * mBackoffMultiplier);
         if (!hasAttemptRemaining()) {

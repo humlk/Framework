@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.sai.base.util.FileUtil;
 import com.sai.base.util.StreamUtil;
-import com.sai.net.exception.BaseException;
+import com.sai.net.exception.SaiException;
 import com.sai.net.http.HttpResponse;
 import com.sai.net.http.NetworkResponse;
 import com.sai.net.http.Response;
@@ -38,7 +38,7 @@ public class FileRequest extends HttpRequest<Void>{
     public Response<byte[]> parseNetworkResponse(NetworkResponse response) {
         if (isCanceled()) {
             mRequestQueue.getDelivery().postCancel(this);
-            return Response.error(new BaseException("请求被取消!"));
+            return Response.error(new SaiException("请求被取消!"));
         }
         if (storeFile.exists()) {
             storeFile.delete();
@@ -47,10 +47,10 @@ public class FileRequest extends HttpRequest<Void>{
             if (tempFile.renameTo(storeFile)) {
                 return Response.success(null, null);
             } else {
-                return Response.error(new BaseException("文件命名失败!"));
+                return Response.error(new SaiException("文件命名失败!"));
             }
         } else {
-            return Response.error(new BaseException("文件下载失败"));
+            return Response.error(new SaiException("文件下载失败"));
         }
     }
 
@@ -100,7 +100,7 @@ public class FileRequest extends HttpRequest<Void>{
             }
         } catch (IOException e) {
             LogUtil.d("文件操作失败,"+e.getMessage());
-            mRequestQueue.getDelivery().postError(this, new BaseException(e.getMessage()));
+            mRequestQueue.getDelivery().postError(this, new SaiException(e.getMessage()));
         }
         return true;
     }

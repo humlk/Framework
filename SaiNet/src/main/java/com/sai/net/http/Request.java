@@ -1,7 +1,7 @@
 package com.sai.net.http;
 
 import com.sai.net.cache.Cache;
-import com.sai.net.exception.BaseException;
+import com.sai.net.exception.SaiException;
 import com.sai.net.model.ErrorMessage;
 import com.sai.net.request.OnResponseListener;
 import com.sai.net.request.RequestOptions;
@@ -63,6 +63,13 @@ public abstract class Request<T> implements RequestInterface, Comparable<Request
         return mTag;
     }
 
+    public RequestOptions getRequestOptions(){
+        return mRequestOptions;
+    }
+
+    public int getCacheModel(){
+        return mRequestOptions.cacheModel;
+    }
     /**
      * 重发策略
      *
@@ -197,8 +204,8 @@ public abstract class Request<T> implements RequestInterface, Comparable<Request
      */
     abstract public Response<T> parseNetworkResponse(NetworkResponse response);
 
-    protected BaseException parseNetworkError(BaseException volleyError) {
-        return volleyError;
+    protected SaiException parseNetworkError(SaiException error) {
+        return error;
     }
 
     abstract protected void deliverResponse(T response);
@@ -216,7 +223,7 @@ public abstract class Request<T> implements RequestInterface, Comparable<Request
         }
     }
 
-    public void deliverError(BaseException error) {
+    public void deliverError(SaiException error) {
         if (mResponseListener != null) {
             ErrorMessage errorMessage = SaiUtil.netRequestError(error);
             mResponseListener.onError(errorMessage.getCode(), errorMessage.getMsg());

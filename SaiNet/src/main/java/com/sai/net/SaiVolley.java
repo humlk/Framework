@@ -1,34 +1,21 @@
 package com.sai.net;
 
-import com.sai.net.cache.DiskBasedCache;
-import com.sai.net.http.BasicNetwork;
-import com.sai.net.http.Network;
-import com.sai.net.http.OkHttpStack;
 import com.sai.net.http.RequestQueue;
-import com.sai.net.security.TrustSSLSocketFactory;
-
-import java.io.File;
-
-import javax.net.ssl.SSLSocketFactory;
-
-import okhttp3.OkHttpClient;
 
 
 class SaiVolley {
-    private static final String DEFAULT_CACHE_DIR = "sai";
-    private static final String VERSION = "sai/1.0";
 
     private static SaiVolley Instance;
 
     private RequestQueue fileDownloadQueue;
 //    private static RequestQueue imageQueue;
     private RequestQueue InstanceRequestQueue;
-
-    private static OkHttpStack mOkHttpUrlStack;
-    private static SSLSocketFactory sslSocketFactory = null;
+//
+//    private static OkHttpStack mOkHttpUrlStack;
+//    private static SSLSocketFactory sslSocketFactory = null;
 //    private String mUserAgent;
-
-    private OkHttpClient mHttpClient;
+//
+//    private OkHttpClient mHttpClient;
 
     private final Object mFileSynObject = new Object();
 
@@ -43,7 +30,7 @@ class SaiVolley {
         return Instance;
     }
     private SaiVolley() {
-        mHttpClient = new OkHttpClient();
+//        mHttpClient = new OkHttpClient();
         InstanceRequestQueue = newRequestQueue();
 
     }
@@ -64,38 +51,38 @@ class SaiVolley {
     }
 
     private RequestQueue createFileQueue(){
-        OkHttpStack stack = new OkHttpStack(mHttpClient.newBuilder().build());
-        Network network = new BasicNetwork(stack);
-        RequestQueue queue = new RequestQueue(null, network);
+//        OkHttpStack stack = new OkHttpStack(mHttpClient.newBuilder().build());
+//        Network network = new BasicNetwork(stack);
+        RequestQueue queue = new RequestQueue(SaiRepository.get());
         queue.start();
         return queue;
     }
     public RequestQueue newRequestQueue() {
-        File cacheDir = new File(SaiNet.getContext().getCacheDir(), DEFAULT_CACHE_DIR);
+//        File cacheDir = new File(SaiNet.getContext().getCacheDir(), DEFAULT_CACHE_DIR);
+//
+//        OkHttpStack stack = getDefaultHttpStack();
+//        Network network = new BasicNetwork(stack);
 
-        OkHttpStack stack = getDefaultHttpStack();
-        Network network = new BasicNetwork(stack);
-
-        RequestQueue queue = new RequestQueue(new DiskBasedCache(cacheDir), network);
+        RequestQueue queue = new RequestQueue(SaiRepository.get());
         queue.start();
         return queue;
     }
 
-    public boolean isNetSafe(){
-        if(sslSocketFactory != null){
-            return true;
-        }
-        return false;
-    }
+//    public boolean isNetSafe(){
+//        if(sslSocketFactory != null){
+//            return true;
+//        }
+//        return false;
+//    }
 
-    private OkHttpStack getDefaultHttpStack() {
-        if (mOkHttpUrlStack == null) {
-            sslSocketFactory = TrustSSLSocketFactory.initSSL(SaiNet.getContext());
-            OkHttpClient client = mHttpClient.newBuilder().sslSocketFactory(sslSocketFactory).build();
-            mOkHttpUrlStack = new OkHttpStack(client,sslSocketFactory);
-        }
-        return mOkHttpUrlStack;
-    }
+//    private OkHttpStack getDefaultHttpStack() {
+//        if (mOkHttpUrlStack == null) {
+//            sslSocketFactory = TrustSSLSocketFactory.initSSL(SaiNet.getContext());
+//            OkHttpClient client = mHttpClient.newBuilder().sslSocketFactory(sslSocketFactory).build();
+//            mOkHttpUrlStack = new OkHttpStack(client,sslSocketFactory);
+//        }
+//        return mOkHttpUrlStack;
+//    }
 
 
 
