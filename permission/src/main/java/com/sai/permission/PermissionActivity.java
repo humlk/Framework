@@ -34,12 +34,13 @@ public class PermissionActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        if(PermissionManager.check(getApplicationContext(),getPermissions())){
+        if(PermissionManager.check(getApplication(),getPermissions())){
             Log.d(TAG,"has permissions");
         }else{
             Log.d(TAG,"do not has permissions");
             PermissionManager.request(this,requestCode,getPermissions());
         }
+
     }
 
     private String[] getPermissions(){
@@ -54,12 +55,12 @@ public class PermissionActivity extends AppCompatActivity{
         }
 
         if(PermissionManager.check(grantResults)){
-            //有权限了
+            //用户同意权限了
             Log.d(TAG, "has permission");
             finish();
         }else{
             Log.d(TAG, "donot have permission");
-            //提示用户申请权限
+            //用户不同意该权限
         }
     }
 }
