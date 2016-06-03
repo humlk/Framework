@@ -16,8 +16,8 @@ public class DemoLogic extends NetRequestLogic {
         startRequest(request);
     }
 
-    @Override
-    protected Object getTag() {
-        return "demoLogic";
-    }
+//    @Override
+//    protected Object getTag() {
+//        return "demoLogic";
+//    }
 }

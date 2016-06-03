@@ -37,6 +37,7 @@ public class HttpHeaderParser {
             String[] tokens = headerValue.split(",");
             for (int i = 0; i < tokens.length; i++) {
                 String token = tokens[i].trim();
+                //如果Cache-Control里为no-cache和no-store则表示不需要缓存，返回null
                 if (token.equals("no-cache") || token.equals("no-store")) {
                     return null;
                 } else if (token.startsWith("max-age=")) {

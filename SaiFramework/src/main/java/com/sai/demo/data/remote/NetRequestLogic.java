@@ -25,7 +25,9 @@ public abstract class NetRequestLogic {
         SaiNet.cancelAllRequest(getTag());
     }
 
-    protected abstract Object getTag();
+    protected Object getTag(){
+        return getClass().getName();
+    }
 
 //    public synchronized void stopRequest() {
 //

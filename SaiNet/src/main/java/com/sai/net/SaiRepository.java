@@ -73,31 +73,50 @@ public class SaiRepository {
         String cacheKey = request.getCacheKey();
         int cacheModel = request.getCacheModel();
         Cache.Entry entry = mCache.get(cacheKey);
-        NetworkResponse networkResponse = null;
-        if(cacheModel == Cache.Model.ONLY_READ_CACHE){
+        NetworkResponse networkResponse;
+        if(cacheModel == Request.Model.NO_CACHE_REQUEST){
             if(entry != null){
                 networkResponse = new NetworkResponse(entry.data, entry.responseHeaders);
-            }else{
-                networkResponse = new NetworkResponse(null, null);
+                return request.parseNetworkResponse(networkResponse);
             }
-        }else if(cacheModel == Cache.Model.NO_CACHE_REQUEST){
-            if(entry != null){
+        }else if(cacheModel == Request.Model.EXPIRED_CACHE_REQUEST){
+            if(entry != null && !entry.isExpired()){
+                //如果缓存没过期
                 networkResponse = new NetworkResponse(entry.data, entry.responseHeaders);
+                return request.parseNetworkResponse(networkResponse);
             }
         }
 
+        request.setCacheEntry(entry);
+
         //request network
         networkResponse = mNetwork.performRequest(request);
-        if(networkResponse == null && cacheModel == Cache.Model.REQUEST_FAILED_READ_CACHE ){
+        if(networkResponse == null && cacheModel == Request.Model.REQUEST_FAILED_READ_CACHE ){
             if(entry != null){
                 networkResponse = new NetworkResponse(entry.data, entry.responseHeaders);
+                return request.parseNetworkResponse(networkResponse);
             }
         }
 
         //解析networkResponse
-        if(networkResponse != null){
-            return request.parseNetworkResponse(networkResponse);
+        if(networkResponse == null){
+            throw new SaiException("no response");
         }
-        throw new SaiException("no response");
+
+        Response response = request.parseNetworkResponse(networkResponse);
+        if(isShouldCache(cacheModel) && response.cacheEntry != null){
+            mCache.put(request.getCacheKey(), response.cacheEntry);
+        }
+        return response;
+    }
+
+
+    private boolean isShouldCache(int cacheModel){
+        if(cacheModel == Request.Model.NO_CACHE_REQUEST
+                || cacheModel == Request.Model.REQUEST_FAILED_READ_CACHE
+                || cacheModel == Request.Model.EXPIRED_CACHE_REQUEST){
+            return true;
+        }
+        return false;
     }
 }

@@ -1,6 +1,5 @@
 package com.sai.net.request;
 
-import com.sai.net.cache.Cache;
 import com.sai.net.http.Request;
 
 /**
@@ -21,8 +20,6 @@ public class RequestOptions {
     /** 超时重连次数 **/
     public int maxRetries = 0;
 
-    /** 是否缓存 默认不缓存**/
-    public boolean shouldCache = false;
     /** 数据模型 **/
-    public int cacheModel = Cache.Model.ONLY_REQUEST;
+    public int cacheModel = Request.Model.ONLY_REQUEST;
 }

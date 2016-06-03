@@ -163,10 +163,6 @@ public abstract class Request<T> implements RequestInterface, Comparable<Request
         }
     }
 
-    public final boolean shouldCache() {
-        return mRequestOptions.shouldCache;
-    }
-
     public final Request<?> setShouldRetryServerErrors(boolean shouldRetryServerErrors) {
         mShouldRetryServerErrors = shouldRetryServerErrors;
         return this;
@@ -263,6 +259,12 @@ public abstract class Request<T> implements RequestInterface, Comparable<Request
         return left == right ?
                 this.mSequence - other.mSequence :
                 right.ordinal() - left.ordinal();
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
     }
 
     public boolean handleResponse(HttpResponse httpResponse){

@@ -12,6 +12,7 @@ public abstract class BaseRequestBuilder<T> {
     protected RequestParams mRequestParams = null;
     protected Object mReqTag = null;
     protected OnResponseListener<T> mCallBackListener = null;
+//    protected WeakReference<OnResponseListener> mCallBackListener;
     protected RequestOptions mRequestOptions;
 
     public BaseRequestBuilder() {
@@ -40,6 +41,7 @@ public abstract class BaseRequestBuilder<T> {
 
     public BaseRequestBuilder callBack(OnResponseListener<T> callBack) {
         this.mCallBackListener = callBack;
+//        this.mCallBackListener = new WeakReference<OnResponseListener>(callBack);
         return this;
     }
 

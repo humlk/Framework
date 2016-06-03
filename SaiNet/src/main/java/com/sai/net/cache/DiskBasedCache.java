@@ -33,6 +33,9 @@ public class DiskBasedCache implements Cache {
 
     private final int mMaxCacheSizeInBytes;
 
+    /**
+     * 缓存容量
+     */
     private static final int DEFAULT_DISK_USAGE_BYTES = 5 * 1024 * 1024;
 
     private static final float HYSTERESIS_FACTOR = 0.9f;

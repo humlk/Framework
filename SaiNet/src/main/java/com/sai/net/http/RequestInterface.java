@@ -37,11 +37,6 @@ interface RequestInterface{
 //        final String RESTFUL = "restful";
 //    }
 
-    public interface UrlType{
-        final int restful = 1;
-        final int form = 0;
-    }
-
 
     public interface RequestState{
         final int NULL = -1;
@@ -50,5 +45,16 @@ interface RequestInterface{
         final int RUNNING = 2;
         final int COMPLATE = 4;
         final int CANCEL = 5;
+    }
+
+    public interface Model{
+        /** 只请求网络 **/
+        final int ONLY_REQUEST = 0;
+        /** 请求失败，读缓存 **/
+        final int REQUEST_FAILED_READ_CACHE = 1;
+        /** 先读缓存没有缓存就去网络请求 **/
+        final int NO_CACHE_REQUEST = 2;
+        /** 先读缓存，缓存过期就去网络请求 **/
+        final int EXPIRED_CACHE_REQUEST = 3;
     }
 }

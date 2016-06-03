@@ -24,7 +24,13 @@ public class BussinessActivity extends BaseActivity implements DemoContract.BVie
     }
 
     @Override
-    public void loadData() {
+    public void loadData(String data) {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        mDemoPresenter.destroy();
     }
 }

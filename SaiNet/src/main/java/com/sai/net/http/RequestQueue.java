@@ -44,10 +44,6 @@ public class RequestQueue {
      */
     private static final int DEFAULT_NETWORK_THREAD_POOL_SIZE = 4;
 
-//    private final Cache mCache;
-//
-//    private final Network mNetwork;
-
     /**
      * 对请求响应进行分发
      */
@@ -66,20 +62,10 @@ public class RequestQueue {
 
     public RequestQueue(Cache cache, Network network, int threadPoolSize,
                         ResponseDelivery delivery) {
-//        mCache = cache;
-//        mNetwork = network;
         mDispatchers = new NetworkDispatcher[threadPoolSize];
         mDelivery = delivery;
     }
 
-    //    public RequestQueue(Cache cache, Network network, int threadPoolSize) {
-//        this(cache, network, threadPoolSize,
-//                new ExecutorDelivery(new Handler(Looper.getMainLooper())));
-//    }
-//
-//    public RequestQueue(Cache cache, Network network) {
-//        this(cache, network, DEFAULT_NETWORK_THREAD_POOL_SIZE);
-//    }
     public RequestQueue(SaiRepository repository, int threadPoolSize, ResponseDelivery delivery) {
         mRepository = repository;
         mDispatchers = new NetworkDispatcher[threadPoolSize];
@@ -111,13 +97,16 @@ public class RequestQueue {
         }
     }
 
+    private void reCycle(){
+        mNetworkQueue.clear();
+        mCurrentRequests.clear();
+        mWaitingRequests.clear();
+
+    }
+
     public int getSequenceNumber() {
         return mSequenceGenerator.incrementAndGet();
     }
-
-//    public Cache getCache() {
-//        return mCache;
-//    }
 
     public interface RequestFilter {
         public boolean apply(Request<?> request);
@@ -163,49 +152,22 @@ public class RequestQueue {
         mNetworkQueue.add(request);
         return request;
 
-
-//        // 检查是否需要缓存，不缓存则直接运行
-//        if (!request.shouldCache()) {
-//            mNetworkQueue.add(request);
-//            return request;
-//        }
-
-//        //如果有相同的地址请求，则进行等待状态
-//        synchronized (mWaitingRequests) {
-//            //默认根据url缓存
-//            String cacheKey = request.getCacheKey();
-//            if (mWaitingRequests.containsKey(cacheKey)) {
-//                //处理同一url多个请求
-//                Queue<Request<?>> stagedRequests = mWaitingRequests.get(cacheKey);
-//                if (stagedRequests == null) {
-//                    stagedRequests = new LinkedList<Request<?>>();
-//                }
-//                stagedRequests.add(request);
-//                mWaitingRequests.put(cacheKey, stagedRequests);
-//            } else {
-//                //直接去缓存获取数据
-//                mWaitingRequests.put(cacheKey, null);
-//                mCacheQueue.add(request);
-//            }
-//            return request;
-//        }
+        //如果前台重复发同一个请求（前面的请求还未回来），是暂时缓存起来还是直接发送还是丢弃......
     }
 
+
+    private void waitRequest(Request request){
+        synchronized (mCurrentRequests) {
+            if(mCurrentRequests.contains(request)){
+
+            }
+        }
+    }
 
     <T> void finish(Request<T> request) {
         synchronized (mCurrentRequests) {
             mCurrentRequests.remove(request);
         }
-//        //请求结束后针对需要缓存的请求进行处理
-//        if (request.shouldCache()) {
-//            synchronized (mWaitingRequests) {
-//                String cacheKey = request.getCacheKey();
-//                Queue<Request<?>> waitingRequests = mWaitingRequests.remove(cacheKey);
-//                if (waitingRequests != null) {
-//                    mCacheQueue.addAll(waitingRequests);
-//                }
-//            }
-//        }
     }
 
     public ResponseDelivery getDelivery() {

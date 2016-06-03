@@ -1,9 +1,8 @@
 package com.sai.demo.presenter.impl;
 
-import com.sai.demo.data.callback.BaseLoadCallBack;
 import com.sai.demo.data.remote.DemoLogic;
+import com.sai.demo.http.RequestCallBack;
 import com.sai.demo.presenter.DemoContract;
-import com.sai.demo.utils.LogUtils;
 
 public class DemoPresenter extends DemoContract.Presenter {
 
@@ -27,19 +26,32 @@ public class DemoPresenter extends DemoContract.Presenter {
     @Override
     public void load() {
 
-        mView.showLoadProgress();
-        mDemoLogic.requestPage(new BaseLoadCallBack<String>(){
+
+        mDemoLogic.requestPage(new RequestCallBack<String>(){
+            @Override
+            public void onPerStart() {
+                mView.showLoadProgress();
+            }
+
             @Override
             public void onSuccess(String response) {
-                LogUtils.d("response :" +response);
                 super.onSuccess(response);
-                mView.loadData();
+                mView.loadData(response);
             }
 
             @Override
             public void onError(String code, String msg) {
                 super.onError(code, msg);
-                LogUtils.d("response error");
+            }
+
+            @Override
+            public void onCancel() {
+                super.onCancel();
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
             }
         });
     }

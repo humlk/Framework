@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * 缓存
  */
-public interface Cache extends CacheInterface{
+public interface Cache{
 
     public Entry get(String key);
 
@@ -23,22 +23,22 @@ public interface Cache extends CacheInterface{
 
 
     public static class Entry {
-        /** The data returned from cache. */
+        /** 缓存数据 */
         public byte[] data;
 
-        /** ETag for cache coherency. */
+        /** http头部中的缓存标签 */
         public String etag;
 
-        /** Date of this response as reported by the server. */
+        /** 服务器返回数据的时间 */
         public long serverDate;
 
         /** 最后一次修改时间 */
         public long lastModified;
 
-        /** TTL for this record. */
+        /** time to live 过期时间 */
         public long ttl;
 
-        /** Soft TTL for this record. */
+        /** 新鲜度时间 默认和ttl相同 */
         public long softTtl;
 
         /** Immutable response headers as received from server; must be non-null. */

@@ -6,7 +6,7 @@ public interface DemoContract {
 
     public interface BView extends BaseView{
         public void showLoadProgress();
-        public void loadData();
+        public void loadData(String data);
     }
 
     public abstract class Presenter extends BasePresenter{
