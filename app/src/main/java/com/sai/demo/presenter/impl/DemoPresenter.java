@@ -6,26 +6,16 @@ import com.sai.demo.presenter.DemoContract;
 
 public class DemoPresenter extends DemoContract.Presenter {
 
-    private DemoContract.BView mView;
+    private DemoContract.CView mView;
 
     private DemoLogic mDemoLogic;
 
-    public DemoPresenter(DemoContract.BView view){
-        mView = view;
+    public DemoPresenter(){
         mDemoLogic = new DemoLogic();
     }
 
     @Override
-    public void destroy() {
-        super.destroy();
-        mView = null;
-        mDemoLogic.stopRequest();
-        mDemoLogic = null;
-    }
-
-    @Override
     public void load() {
-
 
         mDemoLogic.requestPage(new RequestCallBack<String>(){
             @Override
@@ -54,5 +44,17 @@ public class DemoPresenter extends DemoContract.Presenter {
                 super.onFinish();
             }
         });
+    }
+
+    @Override
+    public void onViewAttached(DemoContract.CView view) {
+        mView = view;
+    }
+
+    @Override
+    public void onViewDetached() {
+        mView = null;
+        mDemoLogic.stopRequest();
+        mDemoLogic = null;
     }
 }

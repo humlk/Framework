@@ -1,4 +1,4 @@
-package com.sai.demo.data.remote;
+package com.sai.framework.data.remote;
 
 import com.sai.net.SaiNet;
 import com.sai.net.request.http.HttpRequest;

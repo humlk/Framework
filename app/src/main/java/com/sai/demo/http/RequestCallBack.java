@@ -1,6 +1,6 @@
 package com.sai.demo.http;
 
-import com.sai.demo.data.callback.BaseLoadCallBack;
+import com.sai.framework.data.callback.BaseLoadCallBack;
 import com.sai.demo.utils.LogUtils;
 
 /**

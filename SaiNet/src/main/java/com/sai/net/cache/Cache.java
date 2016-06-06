@@ -48,11 +48,6 @@ public interface Cache{
         public boolean isExpired() {
             return this.ttl < System.currentTimeMillis();
         }
-
-        /** True if a refresh is needed from the original data source. */
-        public boolean refreshNeeded() {
-            return this.softTtl < System.currentTimeMillis();
-        }
     }
 
 }

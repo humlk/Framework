@@ -1,11 +1,10 @@
-package com.sai.net.util;
+package com.sai.base.util;
 
 import java.lang.reflect.ParameterizedType;
 
-
 public class ClassUtil {
 
-    public static <T> T getT(Object o, int i) {
+    public static <T> T getClassArgs(Object o, int i) {
         try {
             return ((Class<T>) ((ParameterizedType) (o.getClass()
                     .getGenericSuperclass())).getActualTypeArguments()[i])

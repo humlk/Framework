@@ -4,18 +4,16 @@ import android.os.Bundle;
 
 import com.sai.demo.presenter.DemoContract;
 import com.sai.demo.presenter.impl.DemoPresenter;
+import com.sai.framework.base.PresenterActivity;
 
 
-public class BussinessActivity extends BaseActivity implements DemoContract.BView{
-
-    private DemoPresenter mDemoPresenter;
+public class BussinessActivity extends PresenterActivity<DemoPresenter> implements DemoContract.CView{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mDemoPresenter = new DemoPresenter(this);
-        mDemoPresenter.load();
+        getPresenter().load();
     }
 
     @Override
@@ -28,9 +26,4 @@ public class BussinessActivity extends BaseActivity implements DemoContract.BVie
 
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-//        mDemoPresenter.destroy();
-    }
 }

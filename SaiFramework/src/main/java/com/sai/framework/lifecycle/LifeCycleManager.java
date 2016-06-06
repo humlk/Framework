@@ -1,4 +1,4 @@
-package com.sai.demo.lifecycle;
+package com.sai.framework.lifecycle;
 
 
 import android.app.Activity;

@@ -1,4 +1,4 @@
-package com.sai.demo.base;
+package com.sai.framework.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sai.demo.lifecycle.LifeCycleManager;
+import com.sai.framework.lifecycle.LifeCycleManager;
 
 
 public class LifeFragment extends Fragment{

@@ -1,7 +1,8 @@
 package com.sai.demo.data.remote;
 
 
-import com.sai.demo.data.callback.BaseLoadCallBack;
+import com.sai.framework.data.callback.BaseLoadCallBack;
+import com.sai.framework.data.remote.NetRequestLogic;
 import com.sai.net.request.RequestBuilder;
 import com.sai.net.request.http.HttpRequest;
 

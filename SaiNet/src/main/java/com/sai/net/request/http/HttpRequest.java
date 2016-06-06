@@ -1,5 +1,6 @@
 package com.sai.net.request.http;
 
+import com.sai.base.util.ClassUtil;
 import com.sai.net.http.HttpHeaderParser;
 import com.sai.net.http.NetworkResponse;
 import com.sai.net.http.Request;
@@ -9,7 +10,6 @@ import com.sai.net.request.RequestOptions;
 import com.sai.net.request.RequestParams;
 import com.sai.net.response.ResponseFactory;
 import com.sai.net.response.ResponseParse;
-import com.sai.net.util.ClassUtil;
 
 import java.util.Map;
 
@@ -33,7 +33,11 @@ public class HttpRequest<T> extends Request<byte[]> {
         if(mResponseListener == null){
             return;
         }
-        Object obj = ClassUtil.getT(mResponseListener, 0);
+
+        //是不是对外提供接口，让上层自己解析
+
+        //默认解析
+        Object obj = ClassUtil.getClassArgs(mResponseListener, 0);
         if(obj == null){
             mResponseListener.onSuccess(response);
             return;
