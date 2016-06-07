@@ -1,7 +1,7 @@
 package com.sai.framework.base.loader;
 
 import android.content.Context;
-import android.support.v4.content.Loader;
+import android.content.Loader;
 import android.util.Log;
 
 /**
