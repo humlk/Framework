@@ -64,6 +64,8 @@ public class JsonObjectUtil {
         StringBuffer buffer = new StringBuffer();
         String key;
         String value;
+
+
         for (Iterator<String> iterator = json.keys(); iterator.hasNext();) {
             key = iterator.next();
             value = json.optString(key);
@@ -81,13 +83,16 @@ public class JsonObjectUtil {
             return "";
         }
         StringBuilder buffer = new StringBuilder();
-        String key;
-        Object value;
-        for (Iterator<String> iterator = maps.keySet().iterator(); iterator.hasNext();) {
-            key = iterator.next();
-            value = maps.get(key);
-            buffer.append("&").append(key).append("=").append(value);
+//        String key;
+//        Object value;
+        for(Map.Entry entry: maps.entrySet()){
+            buffer.append("&").append(entry.getKey()).append("=").append(entry.getValue());
         }
+//        for (Iterator<String> iterator = maps.keySet().iterator(); iterator.hasNext();) {
+//            key = iterator.next();
+//            value = maps.get(key);
+//            buffer.append("&").append(key).append("=").append(value);
+//        }
         String str = buffer.toString();
         if (!StringUtil.isEmpty(str) && str.startsWith("&")) {
             str = str.replaceFirst("&", "");
@@ -101,12 +106,15 @@ public class JsonObjectUtil {
             return "";
         }
         StringBuilder buffer = new StringBuilder();
-        String key;
-        Object value;
-        for (Iterator<String> iterator = maps.keySet().iterator(); iterator.hasNext();) {
-            key = iterator.next();
-            value = maps.get(key);
-            buffer.append("/").append(value);
+//        String key;
+//        Object value;
+//        for (Iterator<String> iterator = maps.keySet().iterator(); iterator.hasNext();) {
+//            key = iterator.next();
+//            value = maps.get(key);
+//            buffer.append("/").append(value);
+//        }
+        for(Map.Entry entry: maps.entrySet()){
+            buffer.append("/").append(entry.getValue());
         }
         String str = buffer.toString();
         if (!StringUtil.isEmpty(str) && str.startsWith("/")) {
@@ -114,6 +122,7 @@ public class JsonObjectUtil {
         }
         return str;
     }
+
     /**
      * map -> json
      * @param maps
@@ -124,14 +133,17 @@ public class JsonObjectUtil {
             return null;
         }
         JSONObject jsonObject = new JSONObject();
-        String key;
-        Object value;
+//        String key;
+//        Object value;
         try {
-            for (Iterator<String> iterator = maps.keySet().iterator(); iterator.hasNext();) {
-                key = iterator.next();
-                value = maps.get(key);
-                jsonObject.put(key, value);
+            for(Map.Entry<String, Object> entry: maps.entrySet()){
+                jsonObject.put(entry.getKey(), entry.getValue());
             }
+//            for (Iterator<String> iterator = maps.keySet().iterator(); iterator.hasNext();) {
+//                key = iterator.next();
+//                value = maps.get(key);
+//                jsonObject.put(key, value);
+//            }
             return jsonObject;
         } catch (JSONException e) {
 //            BaseLogger.d("json 组装失败->" + e);
