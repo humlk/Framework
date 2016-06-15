@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:id="@+id/main_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="home"/>
+
+    <com.sai.ui.view.swipeRefreshLayout.XSwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.sai.ui.view.recyclelistview.XRecyclerListView
+            android:id="@+id/recyclerListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.sai.ui.view.recyclelistview.XRecyclerListView>
+    </com.sai.ui.view.swipeRefreshLayout.XSwipeRefreshLayout>
+</LinearLayout>
+

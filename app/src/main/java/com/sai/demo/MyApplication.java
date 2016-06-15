@@ -1,15 +1,10 @@
 package com.sai.demo;
 
 import android.app.Application;
-import android.content.Context;
 
+import com.sai.monitor.Monitor;
 import com.sai.net.SaiNet;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 
-/**
- * Created by huajie on 2016/5/16.
- */
 public class MyApplication extends Application{
 
     private static MyApplication instance;
@@ -20,15 +15,10 @@ public class MyApplication extends Application{
 
         instance = this;
 
-        refWatcher = LeakCanary.install(this);
         SaiNet.init(this);
         SaiNet.getHelper().setDebug(true);
-    }
 
-    private RefWatcher refWatcher;
-    public static RefWatcher getRefWatcher(Context context) {
-        MyApplication application = (MyApplication) context.getApplicationContext();
-        return application.refWatcher;
+        Monitor.get().init(this);
     }
 
     public static MyApplication get(){

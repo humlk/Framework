@@ -1,5 +1,5 @@
-include ':app', ':permission', ':security', ':ui'
+include ':app', ':permission', ':security', ':ui', ':monitor'
 include ':SaiBase'
 include ':SaiNet'
 include ':libraryconfig'
-include ':SaiFramework'
+include ':framework'

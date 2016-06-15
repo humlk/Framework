@@ -4,10 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Framework.iml" filepath="$PROJECT_DIR$/Framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/SaiBase/SaiBase.iml" filepath="$PROJECT_DIR$/SaiBase/SaiBase.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SaiFramework/SaiFramework.iml" filepath="$PROJECT_DIR$/SaiFramework/SaiFramework.iml" />
       <module fileurl="file://$PROJECT_DIR$/SaiNet/SaiNet.iml" filepath="$PROJECT_DIR$/SaiNet/SaiNet.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraryconfig/libraryconfig.iml" filepath="$PROJECT_DIR$/libraryconfig/libraryconfig.iml" />
+      <module fileurl="file://$PROJECT_DIR$/monitor/monitor.iml" filepath="$PROJECT_DIR$/monitor/monitor.iml" />
       <module fileurl="file://$PROJECT_DIR$/permission/permission.iml" filepath="$PROJECT_DIR$/permission/permission.iml" />
       <module fileurl="file://$PROJECT_DIR$/security/security.iml" filepath="$PROJECT_DIR$/security/security.iml" />
       <module fileurl="file://$PROJECT_DIR$/ui/ui.iml" filepath="$PROJECT_DIR$/ui/ui.iml" />

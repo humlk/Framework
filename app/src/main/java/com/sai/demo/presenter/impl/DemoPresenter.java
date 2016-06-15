@@ -1,8 +1,8 @@
 package com.sai.demo.presenter.impl;
 
 import com.sai.demo.data.remote.DemoLogic;
-import com.sai.demo.http.RequestCallBack;
 import com.sai.demo.presenter.DemoContract;
+import com.sai.net.request.RequestCallBack;
 
 public class DemoPresenter extends DemoContract.Presenter {
 
@@ -15,7 +15,7 @@ public class DemoPresenter extends DemoContract.Presenter {
     }
 
     @Override
-    public void load() {
+    public void load(String id ) {
 
         mDemoLogic.requestPage(new RequestCallBack<String>(){
             @Override

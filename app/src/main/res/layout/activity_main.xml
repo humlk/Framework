@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.dou.MainActivity">
+    android:fitsSystemWindows="true">
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Hello World!" />-->
-    <!-- -->
-    <Button android:text="open"
+    <FrameLayout
+        android:id="@+id/content_fragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_open"/>
-</RelativeLayout>
+        android:layout_height="match_parent"></FrameLayout>
+    <!-- 侧滑栏有两种实现方式
+     1: 使用NavigationView 不过布局是固定的-->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/main_nav_header"
+        app:menu="@menu/menu_main"/>
+
+    <!-- 使用listView自定义侧滑栏
+    layout_gravity 指定侧滑栏的位置-->
+    <ListView
+        android:id="@+id/nav_right_view"
+        android:layout_width="160dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:background="@color/white"
+        android:clipToPadding="false"
+        android:divider="#eee"
+        android:dividerHeight="1dp"
+        android:headerDividersEnabled="true"
+        android:scrollbars="none"/>
+
+</android.support.v4.widget.DrawerLayout>

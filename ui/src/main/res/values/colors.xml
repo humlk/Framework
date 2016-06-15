@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 基础颜色 -->
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- 主题 -->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorControlNormal">#9e9e9e</color>
+    <color name="colorButtonNormal">@color/white</color>
+
+    <!--<color name="refresh_bar_from">@color/colorPrimary</color>-->
+    <!--<color name="refresh_bar_to">@color/colorPrimary</color>-->
+
+    <!--<color name="text_title_color">#333333</color>-->
+    <!--<color name="text_body_color">#666666</color>-->
+    <!--<color name="text_tip_color">#999999</color>-->
+    <!--<color name="text_hint_color">#D7D7D7</color>-->
 </resources>

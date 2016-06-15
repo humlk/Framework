@@ -1,17 +1,20 @@
 package com.sai.demo.ui;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 
-import com.sai.demo.MyApplication;
+import com.sai.monitor.Monitor;
 import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by huajie on 2016/5/16.
- */
+
 public class BaseActivity extends AppCompatActivity{
 
+
+    protected Activity getActivity(){
+        return this;
+    }
 
     @Override
     public void setContentView(int layoutResID) {
@@ -21,7 +24,7 @@ public class BaseActivity extends AppCompatActivity{
 
     public void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = MyApplication.getRefWatcher(this);
+        RefWatcher refWatcher = Monitor.get().getRefWatcher();
         refWatcher.watch(this);//内存泄露检测
     }
 }

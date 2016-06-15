@@ -10,10 +10,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/SaiBase" />
-            <option value="$PROJECT_DIR$/SaiFramework" />
             <option value="$PROJECT_DIR$/SaiNet" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/framework" />
             <option value="$PROJECT_DIR$/libraryconfig" />
+            <option value="$PROJECT_DIR$/monitor" />
             <option value="$PROJECT_DIR$/permission" />
             <option value="$PROJECT_DIR$/security" />
             <option value="$PROJECT_DIR$/ui" />

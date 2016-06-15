@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ CoordinatorLayout维护子View之间协作的容器，和FrameLayout相似，子View是叠加显示的
+ 子View有两个Behavior，一个是自己继承CoordinatorLayout.Behavior来处理协调事件，
+ 一个是对外提供layout_behavior，让兄弟节点使用，完成交互
+ -->
+<!-- android:fitsSystemWindows
+ 该属性是告诉显示窗口contentView是否忽略toolbar,title,底部的虚拟按钮。
+ 如果为true，contentView的显示空间是去除这些控件的区域
+ 如果为false，就是显示空间不去除相关控件，则显示内容是整个屏幕。这个时候就会出现显示内容在title的位置-->
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/main_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <!--
+     AppBarLayout是用来让toolbar响应滑动事件的.
+     该控件提供两个behavior：
+        1. AppBarLayout.ScrollingViewBehavior 自己用
+        2. @string/appbar_scrolling_view_behavior 用来通知AppBarLayout何时发生了滑动事件。
+     *该控件必须为CoordinatorLayout的第一个子控件。
+     -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+        <!-- layout_scrollFlags 当AppBarLayout收到滑动通知后会根据layout_scrollFlags进行事件处理
+          scroll: 所有想滚动出屏幕的view都需要设置这个flag- 没有设置这个flag的view将被固定在屏幕顶部。
+          enterAlways: 这个flag让任意向下的滚动都会导致该view变为可见
+          exitUntilCollapsed: 这个flag时定义何时退出，当你定义了一个minHeight，这个view将在滚动到达这个最小高度的时候消失。
+          enterAlwaysCollapsed:  这个flag定义的是何时进入（已经消失之后何时再次显示）。假设你定义了一个最小高度（minHeight）同时enterAlways也定义了，
+          那么view将在到达这个最小高度的时候开始显示，并且从这个时候开始慢慢展开，当滚动到顶部的时候展开完
+          snap: 当滑动结束后，如果view是部分显示，则滑动到最近的边界，小于50%就隐藏，大于50%就全部显示。
+
+          * scroll和enterAlways通常一起用于滑动  app:layout_scrollFlags="scroll|enterAlways"
+          * enterAlwaysCollapsed和exitUntilCollapsed通常一起用于折叠,这时外面使用CollapsingToolbarLayout
+          *要把带有scroll flag的view放在前面，这样收回的view才能让正常退出，而固定的view继续留在顶部。-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="title"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- XRecyclerListView 使用了AppBarLayout 的behavior，这样当RecyclerListview滑动时就会通知AppBarLayout。 -->
+    <com.sai.ui.view.recyclelistview.XRecyclerListView
+        android:id="@+id/recyclerListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </com.sai.ui.view.recyclelistview.XRecyclerListView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="#00ff00"
+        app:rippleColor="#ff0000"
+        app:elevation="4dp"
+        app:pressedTranslationZ="8dp"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        android:padding="40dp"
+        app:useCompatPadding="true"
+        />
+
+</android.support.design.widget.CoordinatorLayout>

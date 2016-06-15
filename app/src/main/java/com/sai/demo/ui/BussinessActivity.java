@@ -12,8 +12,7 @@ public class BussinessActivity extends PresenterActivity<DemoPresenter> implemen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getPresenter().load();
+        getPresenter().load("");
     }
 
     @Override

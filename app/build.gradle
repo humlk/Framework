@@ -25,11 +25,9 @@ dependencies {
     compile project(':libraryconfig')
     compile project(':SaiBase')
     compile project(':SaiNet')
-    compile project(':SaiFramework')
+    compile project(':framework')
+    compile project(':monitor')
+    compile project(':ui')
 
-
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
 
 }

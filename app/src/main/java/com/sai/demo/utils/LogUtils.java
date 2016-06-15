@@ -2,9 +2,6 @@ package com.sai.demo.utils;
 
 import android.util.Log;
 
-/**
- * Created by huajie on 2016/6/1.
- */
 public class LogUtils {
     private static String TAG = "testLog";
     public static void d(String message){

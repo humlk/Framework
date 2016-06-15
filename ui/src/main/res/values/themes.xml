@@ -1,0 +1,52 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--<style name="AppTheme" parent="AppThemeBase">-->
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <!--&lt;!&ndash;ActionBar的颜色&ndash;&gt;-->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--&lt;!&ndash;最顶部状态栏的颜色 显示电量的地方&ndash;&gt;-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+
+        <!--&lt;!&ndash; toolbar 文字颜色 &ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:textColorPrimary">@color/text_body_color</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:textColorHint">@color/text_hint_color</item>&ndash;&gt;-->
+
+        <!--&lt;!&ndash; 各控制元件(如：check box、switch 或是 radoi) 被勾选 (checked) 或是选定 (selected) 的颜色 &ndash;&gt;-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <!--&lt;!&ndash; 和 colorAccent相反，各控制元件正常状态下按钮的颜色 &ndash;&gt;-->
+        <!--<item name="colorControlNormal">@color/colorControlNormal</item>-->
+        <!--&lt;!&ndash; 默认状态下Button按钮的颜色 &ndash;&gt;-->
+        <!--<item name="colorButtonNormal">@color/colorButtonNormal</item>-->
+        <!--<item name="buttonStyle">@style/AppTheme.Button</item>-->
+
+        <!--&lt;!&ndash; App 的背景色 &ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:windowBackground">@color/white</item>&ndash;&gt;-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+
+    <!--</style>-->
+
+    <!--&lt;!&ndash; Base application theme. &ndash;&gt;-->
+    <!--<style name="AppThemeBase" parent="Theme.AppCompat.Light.NoActionBar">-->
+        <!--<item name="actionMenuTextColor">@android:color/white</item>-->
+        <!--<item name="android:textColorSecondary">@android:color/black</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppTheme.Button">-->
+        <!--<item name="android:minHeight">0dp</item>-->
+        <!--<item name="android:minWidth">0dp</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppTheme.noStateBar" parent="@style/AppTheme">-->
+        <!--<item name="android:windowTranslucentStatus" tools:targetApi="21">true</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppTheme.TransparentActivity" parent="AppTheme">-->
+
+        <!--&lt;!&ndash; 使用覆盖模式 &ndash;&gt;-->
+        <!--<item name="windowActionBarOverlay">false</item>-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+    <!--</style>-->
+
+</resources>

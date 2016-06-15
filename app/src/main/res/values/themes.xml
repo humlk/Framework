@@ -1,0 +1,51 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="SaiAppTheme" parent="SaiAppThemeBase">
+        <!-- Customize your theme here. -->
+        <!--ActionBar的颜色-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--最顶部状态栏的颜色 显示电量的地方-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <!-- toolbar 文字颜色 -->
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorHint">@color/text_hint_color</item>
+
+        <!-- 各控制元件(如：check box、switch 或是 radoi) 被勾选 (checked) 或是选定 (selected) 的颜色 -->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- 和 colorAccent相反，各控制元件正常状态下按钮的颜色 -->
+        <item name="colorControlNormal">@color/colorControlNormal</item>
+        <!-- 默认状态下Button按钮的颜色 -->
+        <item name="colorButtonNormal">@color/colorButtonNormal</item>
+        <item name="buttonStyle">@style/SaiAppTheme.Button</item>
+
+        <!-- App 的背景色 -->
+        <!--<item name="android:windowBackground">@color/white</item>-->
+        <item name="android:windowNoTitle">true</item>
+
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="SaiAppThemeBase" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/black</item>
+    </style>
+
+    <style name="SaiAppTheme.Button">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+    <style name="SaiAppTheme.noStateBar">
+        <item name="android:windowTranslucentStatus" tools:targetApi="21">true</item>
+    </style>
+
+    <style name="SaiAppTheme.TransparentActivity">
+        <!-- 使用覆盖模式 -->
+        <item name="windowActionBarOverlay">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+</resources>

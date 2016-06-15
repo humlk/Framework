@@ -5,30 +5,30 @@ package com.sai.net.http;
  */
 interface RequestInterface{
 
-    public interface Method{
-        final int GET = 0;
-        final int POST = 1;
-        final int PUT = 2;
-        final int DELETE = 3;
-        final int HEAD = 4;
-        final int OPTIONS = 5;
-        final int TRACE = 6;
-        final int PATCH = 7;
+    interface Method{
+        int GET = 0;
+        int POST = 1;
+        int PUT = 2;
+        int DELETE = 3;
+        int HEAD = 4;
+        int OPTIONS = 5;
+        int TRACE = 6;
+        int PATCH = 7;
     }
 
 
     /** 请求优先级 **/
-    public enum Priority {
+    enum Priority {
         LOW,
         NORMAL,
         HIGH,
         IMMEDIATE
     }
 
-    public interface Protocol{
-        final String HTTP = "http";
-        final String HTTPS = "https";
-        final String TCP = "tcp";
+    interface Protocol{
+        String HTTP = "http";
+        String HTTPS = "https";
+        String TCP = "tcp";
     }
 
 //    public interface ContentType{
@@ -38,23 +38,23 @@ interface RequestInterface{
 //    }
 
 
-    public interface RequestState{
-        final int NULL = -1;
-        final int SUCCESS = 0;
-        final int FAILED = 1;
-        final int RUNNING = 2;
-        final int COMPLATE = 4;
-        final int CANCEL = 5;
+    interface RequestState{
+        int NULL = -1;
+        int SUCCESS = 0;
+        int FAILED = 1;
+        int RUNNING = 2;
+        int COMPLATE = 4;
+        int CANCEL = 5;
     }
 
-    public interface Model{
+    interface Model{
         /** 只请求网络 **/
-        final int ONLY_REQUEST = 0;
+        int ONLY_REQUEST = 0;
         /** 请求失败，读缓存 **/
-        final int REQUEST_FAILED_READ_CACHE = 1;
+        int REQUEST_FAILED_READ_CACHE = 1;
         /** 先读缓存没有缓存就去网络请求 **/
-        final int NO_CACHE_REQUEST = 2;
+        int NO_CACHE_REQUEST = 2;
         /** 先读缓存，缓存过期就去网络请求 **/
-        final int EXPIRED_CACHE_REQUEST = 3;
+        int EXPIRED_CACHE_REQUEST = 3;
     }
 }

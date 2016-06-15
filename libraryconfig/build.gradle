@@ -21,6 +21,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile (
+            "com.android.support:support-v4:$rootProject.supportLibraryVersion",
+            "com.android.support:cardview-v7:$rootProject.supportLibraryVersion",
             "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion",
             "com.android.support:design:$rootProject.supportLibraryVersion"
     )
@@ -30,4 +32,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
 
     compile 'com.jakewharton:butterknife:7.0.1'
+
+
 }

@@ -1,8 +1,6 @@
 package com.sai.net.request;
 
 
-import com.sai.net.util.LogUtil;
-
 public class RequestCallBack<T> implements OnResponseListener<T> {
 
 
@@ -19,7 +17,6 @@ public class RequestCallBack<T> implements OnResponseListener<T> {
     @Override
     public void onError(String code, String msg) {
 
-        LogUtil.d("业务失败，"+msg);
     }
 
     @Override
