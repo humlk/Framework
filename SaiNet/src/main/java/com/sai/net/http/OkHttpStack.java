@@ -1,5 +1,7 @@
 package com.sai.net.http;
 
+import com.sai.net.request.RequestOptions;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,8 +69,7 @@ public class OkHttpStack implements HttpStack{
 
         //网络请求
         OkHttpClient client = httpClientBuild.build();
-        Response response = null;
-        response = client.newCall(builder.build()).execute();
+        Response response = client.newCall(builder.build()).execute();
         if(response == null){
             throw new IOException("response is null");
         }
@@ -107,28 +108,28 @@ public class OkHttpStack implements HttpStack{
     static void setConnectionParametersForRequest(okhttp3.Request.Builder builder,
                                                   Request<?> request)  {
         switch (request.getMethod()) {
-            case Request.Method.GET:
+            case RequestOptions.Method.GET:
                 builder.get();
                 break;
-            case Request.Method.DELETE:
+            case RequestOptions.Method.DELETE:
                 builder.delete(getBody(request));
                 break;
-            case Request.Method.POST:
+            case RequestOptions.Method.POST:
                 builder.post(getBody(request));
                 break;
-            case Request.Method.PUT:
+            case RequestOptions.Method.PUT:
                 builder.post(getBody(request));
                 break;
-            case Request.Method.HEAD:
+            case RequestOptions.Method.HEAD:
                 builder.head();
                 break;
-            case Request.Method.OPTIONS:
+            case RequestOptions.Method.OPTIONS:
                 builder.method("OPTIONS",null);
                 break;
-            case Request.Method.TRACE:
+            case RequestOptions.Method.TRACE:
                 builder.method("TRACE", null);
                 break;
-            case Request.Method.PATCH:
+            case RequestOptions.Method.PATCH:
                 builder.patch(getBody(request));
                 break;
             default:

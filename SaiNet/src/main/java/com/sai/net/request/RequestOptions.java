@@ -1,16 +1,15 @@
 package com.sai.net.request;
 
-import com.sai.net.http.Request;
-
 /**
  * 网络请求的配置信息
  */
-public class RequestOptions {
+public class RequestOptions implements RequestInterface{
 
     /** 请求方法 Request.Method **/
-    public int method = Request.Method.GET;
+    public int method = Method.GET;
     /** 请求内容类型 **/
-    public String contentType;
+//    public String contentType;
+
     /** 请求协议 Request.Protocol **/
     public String protocol;
 
@@ -21,5 +20,5 @@ public class RequestOptions {
     public int maxRetries = 0;
 
     /** 数据模型 **/
-    public int cacheModel = Request.Model.ONLY_REQUEST;
+    public int cacheModel = Model.ONLY_REQUEST;
 }

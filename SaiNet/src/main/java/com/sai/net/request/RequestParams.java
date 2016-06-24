@@ -218,40 +218,11 @@ public class RequestParams {
     }
 
     public String getUrlParams() {
-        return "?"+ JsonObjectUtil.mapToRequestParameter(mUrlParams);
+        return JsonObjectUtil.mapToRequestParameter(mUrlParams);
     }
     public Map getHeaders() {
         mHeaders.put("Accept-Encoding", "identity");
         return mHeaders;
     }
-
-//    public UrlBuild getUrlBuild(){
-//        return new UrlBuild(mUrlParams);
-//    }
-
-//    public static class UrlBuild{
-//        private Map mUrlParams = null;
-//        public UrlBuild(Map urlParams){
-//            mUrlParams = urlParams;
-//        }
-////        public String toJson(){
-////            JSONObject json = JsonObjectUtil.mapToJson(mUrlParams);
-////            return json!=null?json.toString():"";
-////        }
-//
-//        public String toRestful(){
-//
-//            return JsonObjectUtil.mapToRestfulParameter(mUrlParams);
-//        }
-//
-//        public String toForm() {
-//            return JsonObjectUtil.mapToRequestParameter(mUrlParams);
-//        }
-//
-//        public Map getParams(){
-//            return mUrlParams;
-//        }
-//    }
-
 
 }

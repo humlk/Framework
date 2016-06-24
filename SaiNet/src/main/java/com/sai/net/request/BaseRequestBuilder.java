@@ -12,7 +12,6 @@ public abstract class BaseRequestBuilder<T> {
     protected RequestParams mRequestParams = null;
     protected Object mReqTag = null;
     protected OnResponseListener<T> mCallBackListener = null;
-//    protected WeakReference<OnResponseListener> mCallBackListener;
     protected RequestOptions mRequestOptions;
 
     public BaseRequestBuilder() {
@@ -52,7 +51,7 @@ public abstract class BaseRequestBuilder<T> {
 
         //先处理url
         String url = getUrl();
-        if (mRequestOptions.method == Request.Method.GET && mRequestParams != null) {
+        if (mRequestOptions.method == RequestOptions.Method.GET && mRequestParams != null) {
             url = StringUtil.toString(url, "?", mRequestParams.getUrlParams());
         }
 

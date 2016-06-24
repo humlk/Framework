@@ -1,11 +1,11 @@
 package com.sai.base.tools.bean;
 
 /**
- * Created by huajie on 2016/5/31.
+ * 对象属性拷贝
  */
 public class BeanCopyUtil {
 
-    public static void copy(Object src, Object dst){
+    public static <S,D> void copy(S src, D dst){
 
     }
 }

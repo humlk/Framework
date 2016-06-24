@@ -1,4 +1,4 @@
-package com.sai.ui.manager;
+package com.sai.framework.manager;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

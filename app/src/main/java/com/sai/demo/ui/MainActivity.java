@@ -15,7 +15,8 @@ import android.widget.TextView;
 
 import com.sai.demo.R;
 import com.sai.demo.fragment.HomeFragment;
-import com.sai.ui.manager.FragmentHelper;
+import com.sai.framework.manager.FragmentHelper;
+import com.sai.ui.util.AnotationUtils;
 import com.sai.ui.view.listview.XListViewAdapter;
 import com.sai.ui.view.listview.XListViewHolder;
 
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+
 
 public class MainActivity extends BaseActivity implements AdapterView.OnItemClickListener{
 
@@ -43,6 +45,10 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
 
         setContentView(R.layout.activity_main);
 
+       /*
+       我是一大段
+       我废话比较多
+        */
         setupDrawerContent();
 
         HomeFragment fragment = HomeFragment.newInstance();
@@ -51,6 +57,16 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
     }
 
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    private int getUserAge(String id) throws Exception{
+        AnotationUtils.test_hide();
+        return 0;
+    }
     private void setupDrawerContent() {
         //left
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

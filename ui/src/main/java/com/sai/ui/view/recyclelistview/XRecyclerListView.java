@@ -49,6 +49,7 @@ public class XRecyclerListView extends RecyclerView{
         });
     }
 
+
     public void setOrientation(int orientation){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(orientation);

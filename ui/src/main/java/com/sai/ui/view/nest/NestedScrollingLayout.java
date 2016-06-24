@@ -42,7 +42,10 @@ public class NestedScrollingLayout extends FrameLayout implements NestedScrollin
     }
 
 
-    /*----------------------------NestedScrollingParent----------------------------------*/
+    /*----------------------------NestedScrollingParent----------------*/
+    /*--    parent的方法都是onXX()，可以看见都是依靠child来回调的        --*/
+    /*--    child和target是同一个东西，目前不知道为什么要分两个。          --*/
+    /*--    在childHelper中使用了View child = mView(target)，将child指向target --*/
     @Override
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
         //如果child是纵向滑动的话也参与到child的滑动事件中
@@ -94,7 +97,7 @@ public class NestedScrollingLayout extends FrameLayout implements NestedScrollin
 
 
 
-    /*----------------------NestedScrollingChild 做为child时的处理-------------------------*/
+    /*----------------NestedScrollingChild 做为child时的处理 使用ChildHelper和parent交互-------------------*/
 
     @Override
     public void setNestedScrollingEnabled(boolean enabled) {

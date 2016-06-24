@@ -88,7 +88,7 @@ public class SysAppActivity extends BaseActivity {
             @Override
             public void onItemClick(XRecyclerViewAdapter adapter, View view, int position) {
                 AppInfo appInfo = (AppInfo)adapter.getObject(position);
-                Intent intent = new Intent(getActivity(), NestActivity.class);
+                Intent intent = new Intent(getActivity(), SysAppDetailActivity.class);
                 intent.putExtra("componentName",appInfo.getComponentName());
                 startActivity(intent);
             }

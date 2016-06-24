@@ -1,19 +1,19 @@
-package com.sai.monitor.profiler;
+package com.sai.monitor.monitor;
 
 import android.app.Application;
 
 /**
  *
  */
-public class MemoryProfiler {
+public class MemoryMonitor {
 
     private Application mApplication;
 
     private static class Instance{
-        static MemoryProfiler mp = new MemoryProfiler();
+        static MemoryMonitor mp = new MemoryMonitor();
     }
 
-    public static MemoryProfiler get(){
+    public static MemoryMonitor get(){
         return Instance.mp;
     }
 

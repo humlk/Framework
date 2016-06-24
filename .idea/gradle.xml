@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/monitor" />
             <option value="$PROJECT_DIR$/permission" />
             <option value="$PROJECT_DIR$/security" />
+            <option value="$PROJECT_DIR$/test" />
             <option value="$PROJECT_DIR$/ui" />
           </set>
         </option>

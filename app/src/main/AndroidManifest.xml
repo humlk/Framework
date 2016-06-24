@@ -78,6 +78,12 @@
         </activity>
         <activity android:name="com.sai.demo.ui.sysapp.SysAppDetailActivity"/>
         <activity android:name="com.sai.demo.ui.sysapp.NestActivity"/>
+
+        <activity android:name="com.sai.demo.ui.monitor.MonitorActivity" android:label="monitor">
+            <intent-filter>
+                <action android:name="android.intent.action.myDoor"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

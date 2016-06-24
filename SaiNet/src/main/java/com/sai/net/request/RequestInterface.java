@@ -1,9 +1,9 @@
-package com.sai.net.http;
+package com.sai.net.request;
 
 /**
  * 请求任务
  */
-interface RequestInterface{
+interface RequestInterface {
 
     interface Method{
         int GET = 0;

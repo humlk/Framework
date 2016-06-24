@@ -4,7 +4,7 @@ package com.sai.monitor.log;
 import android.text.TextUtils;
 import android.util.Log;
 
-public class LogUtil {
+public class LogManager {
     private static boolean isDebug = true;
     private static String TAG = "monitor";
 

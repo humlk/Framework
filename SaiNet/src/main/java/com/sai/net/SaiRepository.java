@@ -9,6 +9,7 @@ import com.sai.net.http.NetworkResponse;
 import com.sai.net.http.OkHttpStack;
 import com.sai.net.http.Request;
 import com.sai.net.http.Response;
+import com.sai.net.request.RequestOptions;
 import com.sai.net.security.TrustSSLSocketFactory;
 
 import java.io.File;
@@ -74,12 +75,12 @@ public class SaiRepository {
         int cacheModel = request.getCacheModel();
         Cache.Entry entry = mCache.get(cacheKey);
         NetworkResponse networkResponse;
-        if(cacheModel == Request.Model.NO_CACHE_REQUEST){
+        if(cacheModel == RequestOptions.Model.NO_CACHE_REQUEST){
             if(entry != null){
                 networkResponse = new NetworkResponse(entry.data, entry.responseHeaders);
                 return request.parseNetworkResponse(networkResponse);
             }
-        }else if(cacheModel == Request.Model.EXPIRED_CACHE_REQUEST){
+        }else if(cacheModel == RequestOptions.Model.EXPIRED_CACHE_REQUEST){
             if(entry != null && !entry.isExpired()){
                 //如果缓存没过期
                 networkResponse = new NetworkResponse(entry.data, entry.responseHeaders);
@@ -91,7 +92,7 @@ public class SaiRepository {
 
         //request network
         networkResponse = mNetwork.performRequest(request);
-        if(networkResponse == null && cacheModel == Request.Model.REQUEST_FAILED_READ_CACHE ){
+        if(networkResponse == null && cacheModel == RequestOptions.Model.REQUEST_FAILED_READ_CACHE ){
             if(entry != null){
                 networkResponse = new NetworkResponse(entry.data, entry.responseHeaders);
                 return request.parseNetworkResponse(networkResponse);
@@ -112,9 +113,9 @@ public class SaiRepository {
 
 
     private boolean isShouldCache(int cacheModel){
-        if(cacheModel == Request.Model.NO_CACHE_REQUEST
-                || cacheModel == Request.Model.REQUEST_FAILED_READ_CACHE
-                || cacheModel == Request.Model.EXPIRED_CACHE_REQUEST){
+        if(cacheModel == RequestOptions.Model.NO_CACHE_REQUEST
+                || cacheModel == RequestOptions.Model.REQUEST_FAILED_READ_CACHE
+                || cacheModel == RequestOptions.Model.EXPIRED_CACHE_REQUEST){
             return true;
         }
         return false;

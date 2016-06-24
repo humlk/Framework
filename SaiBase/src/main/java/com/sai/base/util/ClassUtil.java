@@ -19,6 +19,11 @@ public class ClassUtil {
         return null;
     }
 
+    public static Class<?> getClass(Object o, int i){
+        return (Class)((ParameterizedType) (o.getClass()
+                .getGenericSuperclass())).getActualTypeArguments()[i];
+    }
+
     public static Class<?> forName(String className) {
         try {
             return Class.forName(className);

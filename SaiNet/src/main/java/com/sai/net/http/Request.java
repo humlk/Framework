@@ -16,7 +16,7 @@ import java.util.Map;
  * 请求任务
  * @param <T>
  */
-public abstract class Request<T> implements RequestInterface, Comparable<Request<T>>{
+public abstract class Request<T> implements Comparable<Request<T>>{
 
     private static final String DEFAULT_PARAMS_ENCODING = "UTF-8";
 
@@ -173,8 +173,8 @@ public abstract class Request<T> implements RequestInterface, Comparable<Request
     }
 
 
-    public Priority getPriority() {
-        return Priority.NORMAL;
+    public RequestOptions.Priority getPriority() {
+        return RequestOptions.Priority.NORMAL;
     }
 
     public final int getTimeoutMs() {
@@ -253,8 +253,8 @@ public abstract class Request<T> implements RequestInterface, Comparable<Request
 
     @Override
     public int compareTo(Request<T> other) {
-        Priority left = this.getPriority();
-        Priority right = other.getPriority();
+        RequestOptions.Priority left = this.getPriority();
+        RequestOptions.Priority right = other.getPriority();
 
         return left == right ?
                 this.mSequence - other.mSequence :

@@ -9,7 +9,6 @@ import com.sai.demo.MyApplication;
 import com.sai.demo.R;
 import com.sai.demo.model.ResponseBean;
 import com.sai.net.SaiNet;
-import com.sai.net.http.Request;
 import com.sai.net.request.FileRequestBuilder;
 import com.sai.net.request.RequestBuilder;
 import com.sai.net.request.RequestCallBack;
@@ -85,10 +84,7 @@ public class NetTestActivity extends BaseActivity {
         RequestParams requestParams = new RequestParams();
         requestParams.put("key1", "1.0.0");
 
-        RequestOptions options = new RequestOptions();
-        options.method = Request.Method.POST;
-
-        HttpRequest request = new RequestBuilder().url("").options(options)
+        HttpRequest request = new RequestBuilder().url("")
                 .callBack(new RequestCallBack<JSONObject>() {
                     @Override
                     public void onSuccess(JSONObject response) {
@@ -103,6 +99,7 @@ public class NetTestActivity extends BaseActivity {
 
         SaiNet.addRequest(request);
     }
+
     @OnClick(R.id.btn_upload)
     public void upload() {
         RequestParams requestParams = new RequestParams();
@@ -116,7 +113,7 @@ public class NetTestActivity extends BaseActivity {
         requestParams.put("file", "test2.jpg", BitmapUtil.bitmapTobytes(bitmap));
 
         RequestOptions options = new RequestOptions();
-        options.method = Request.Method.POST;
+        options.method = RequestOptions.Method.POST;
 
         HttpRequest request = new RequestBuilder().url("http://10.112.88.111:8085/fdfs_web/api/uploadFile4MultiPart").params(requestParams).options(options)
                 .callBack(new RequestCallBack<String>() {

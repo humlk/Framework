@@ -1,9 +1,9 @@
 package com.sai.demo.fragment;
 
-import com.sai.framework.base.LifeFragment;
+import android.support.v4.app.Fragment;
 
 
-public class BaseFragment extends LifeFragment{
+public class BaseFragment extends Fragment{
 
 
 }
