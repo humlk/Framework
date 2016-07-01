@@ -1,22 +1,22 @@
-package com.sai.monitor.executor;
+package com.sai.monitor.agent.uihandler;
 
 
 import android.os.Looper;
 import android.util.Printer;
 
-public class UIThreadExecutor {
+public class UiHandlerAgent {
 
     private UIPrinter mUIPrinter;
 
     private static class Instance {
-        public static UIThreadExecutor instance = new UIThreadExecutor();
+        public static UiHandlerAgent instance = new UiHandlerAgent();
     }
 
-    private UIThreadExecutor() {
+    private UiHandlerAgent() {
         mUIPrinter = new UIPrinter();
     }
 
-    public UIThreadExecutor get() {
+    public UiHandlerAgent get() {
         return Instance.instance;
     }
 
@@ -49,6 +49,4 @@ public class UIThreadExecutor {
             return false;
         }
     }
-
-
 }

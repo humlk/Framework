@@ -2,9 +2,7 @@ package com.sai.monitor;
 
 import android.app.Application;
 
-import com.sai.monitor.monitor.LifeCycleMonitor;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
+import com.sai.monitor.agent.life.LifeCycleAgent;
 
 /**
  *
@@ -12,7 +10,6 @@ import com.squareup.leakcanary.RefWatcher;
 public class Monitor {
 
     private static Application mApplication;
-    private static RefWatcher mRefWatcher;
 
     private static Monitor instance;
 
@@ -35,39 +32,28 @@ public class Monitor {
 
     private static void startLife(MonitorPolicy monitorPolicy){
         if(monitorPolicy.mActivityLifecycleCallbacks != null || monitorPolicy.mFragmentLifecycleCallbacks != null){
-            LifeCycleMonitor.get().init(mApplication);
-            LifeCycleMonitor.get().registerFragmentLifecycle(monitorPolicy.mFragmentLifecycleCallbacks);
-            LifeCycleMonitor.get().registerActivityLifecycle(monitorPolicy.mActivityLifecycleCallbacks);
-            LifeCycleMonitor.get().start();
+            LifeCycleAgent.get().init(mApplication);
+            LifeCycleAgent.get().registerFragmentLifecycle(monitorPolicy.mFragmentLifecycleCallbacks);
+            LifeCycleAgent.get().registerActivityLifecycle(monitorPolicy.mActivityLifecycleCallbacks);
+            LifeCycleAgent.get().start();
         }
     }
 
     private static void memory(MonitorPolicy monitorPolicy){
-
+        //内存使用
     }
 
     private static void leak(MonitorPolicy monitorPolicy){
+        //内存泄露
         if(monitorPolicy.mLeak){
-            if(mRefWatcher == null){
-                mRefWatcher = LeakCanary.install(mApplication);
-            }
+
         }
     }
 
-    /**
-     * 监控内存泄露
-     *
-     * @return
-     */
-    public static RefWatcher getRefWatcher() {
-        return mRefWatcher;
-    }
-
-
     public static class MonitorPolicy {
         private boolean mLeak = false;
-        LifeCycleMonitor.ActivityLifecycleCallbacks mActivityLifecycleCallbacks;
-        LifeCycleMonitor.FragmentLifecycleCallbacks mFragmentLifecycleCallbacks;
+        LifeCycleAgent.ActivityLifecycleCallbacks mActivityLifecycleCallbacks;
+        LifeCycleAgent.FragmentLifecycleCallbacks mFragmentLifecycleCallbacks;
 
         public MonitorPolicy(Builder builder) {
             mLeak = builder.mLeak;
@@ -78,15 +64,15 @@ public class Monitor {
         public static class Builder {
             boolean mLeak = false;
             boolean mMemory = false;
-            LifeCycleMonitor.ActivityLifecycleCallbacks mActivityLifecycleCallbacks;
-            LifeCycleMonitor.FragmentLifecycleCallbacks mFragmentLifecycleCallbacks;
+            LifeCycleAgent.ActivityLifecycleCallbacks mActivityLifecycleCallbacks;
+            LifeCycleAgent.FragmentLifecycleCallbacks mFragmentLifecycleCallbacks;
 
-            public Builder activityLife(LifeCycleMonitor.ActivityLifecycleCallbacks callbacks) {
+            public Builder activityLife(LifeCycleAgent.ActivityLifecycleCallbacks callbacks) {
                 mActivityLifecycleCallbacks = callbacks;
                 return this;
             }
 
-            public Builder fragmentLife(LifeCycleMonitor.FragmentLifecycleCallbacks callbacks) {
+            public Builder fragmentLife(LifeCycleAgent.FragmentLifecycleCallbacks callbacks) {
                 mFragmentLifecycleCallbacks = callbacks;
                 return this;
             }

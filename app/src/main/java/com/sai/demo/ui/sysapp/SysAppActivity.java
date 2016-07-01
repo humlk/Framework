@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sai.demo.MyApplication;
 import com.sai.demo.R;
 import com.sai.demo.model.sysapp.AppInfo;
 import com.sai.demo.ui.BaseActivity;
@@ -56,6 +57,8 @@ public class SysAppActivity extends BaseActivity {
                 ToastUtil.show(mMainContent, "i am snackbar");
             }
         });
+
+        MyApplication.mActivityList.add(this);
     }
 
     private void initData() {

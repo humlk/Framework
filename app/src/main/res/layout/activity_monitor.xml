@@ -9,7 +9,24 @@
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin">
 
-    <FrameLayout android:id="@+id/fragment"
+    <!--<FrameLayout android:id="@+id/fragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"></FrameLayout>-->
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="wrap_content"
+        style="@style/edt"
+        android:id="@+id/edt_key"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_start"
+        style="@style/btn"
+        android:text="start"/>
+
+    <Button style="@style/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_stop"
+        android:text="stop"/>
 </LinearLayout>

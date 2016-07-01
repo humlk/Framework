@@ -1,4 +1,4 @@
-package com.sai.monitor.monitor;
+package com.sai.monitor.agent.life;
 
 import android.app.Activity;
 import android.app.Application;
@@ -17,14 +17,7 @@ import java.util.List;
  * @date: 2016/6/22
  * @Copyright (c) 2016. huajie Inc. All rights reserved.
  */
-public class LifeCycleMonitor {
-
-    private static final int INITIALIZING = 0;     // Not yet created.
-    private static final int CREATED = 1;          // Created.
-    private static final int ACTIVITY_CREATED = 2; // The activity has finished its creation.
-    private static final int STOPPED = 3;          // Fully created, not started.
-    private static final int STARTED = 4;          // Created and started, not resumed.
-    private static final int RESUMED = 5;          // Created started and resumed.
+public class LifeCycleAgent {
 
     private Application mApplication = null;
 
@@ -34,11 +27,11 @@ public class LifeCycleMonitor {
 
     private FragmentLifecycleCallbacks mFragmentLifecycleCallbacks;
 
-    private static LifeCycleMonitor instance = new LifeCycleMonitor();
+    private static LifeCycleAgent instance = new LifeCycleAgent();
 
-    private LifeCycleMonitor(){};
+    private LifeCycleAgent(){};
 
-    public static LifeCycleMonitor get(){
+    public static LifeCycleAgent get(){
         return instance;
     }
 
@@ -60,31 +53,26 @@ public class LifeCycleMonitor {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                 dispatchActivityCreated(activity, savedInstanceState);
-                dispatchFragment(activity, CREATED);
             }
 
             @Override
             public void onActivityStarted(Activity activity) {
                 dispatchActivityStarted(activity);
-                dispatchFragment(activity, STARTED);
             }
 
             @Override
             public void onActivityResumed(Activity activity) {
                 dispatchActivityResumed(activity);
-                dispatchFragment(activity, RESUMED);
             }
 
             @Override
             public void onActivityPaused(Activity activity) {
                 onActivityPaused(activity);
-                dispatchFragment(activity, STARTED);
             }
 
             @Override
             public void onActivityStopped(Activity activity) {
                 onActivityStopped(activity);
-                dispatchFragment(activity, STOPPED);
             }
 
             @Override
@@ -95,7 +83,6 @@ public class LifeCycleMonitor {
             @Override
             public void onActivityDestroyed(Activity activity) {
                 onActivityDestroyed(activity);
-                dispatchFragment(activity, INITIALIZING);
             }
         };
         mApplication.registerActivityLifecycleCallbacks(mApplicationCallbacks);
